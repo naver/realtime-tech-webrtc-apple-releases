@@ -36,6 +36,9 @@ def run_process(command: List[str], print_log: bool = True):
     subprocess.run(command, check=True)
 
 def release(tag, build_directory, skip_build):
+
+    check_gh_auth()
+    
     original_directory = os.getcwd()
 
     #1: Build the xcframework
@@ -173,8 +176,6 @@ def check_webrtc_version_match(build_directory, expected_tag):
         return False
 
 def main():
-    
-    check_gh_auth()
 
     parser = argparse.ArgumentParser(description='Deploy WebRTC Framework')
     subparsers = parser.add_subparsers(dest='command')
